@@ -1,0 +1,8 @@
+FROM scratch
+MAINTAINER Ferran Rodenas <frodenas@gmail.com>
+
+# Add files
+ADD docker-tile-example /docker-tile-example
+
+# Command to run
+ENTRYPOINT ["/docker-tile-example"]

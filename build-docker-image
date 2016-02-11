@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -e
+
+echo -e "\n Cleaning Docker Tile Example Docker image..."
+docker rmi cfplatformeng/docker-tile-example || true
+
+echo -e "\n Cleaning Docker Tile Example Builder image..."
+docker rmi cfplatformeng/docker-tile-example-builder || true
+
+echo -e "\n Creating Docker Tile Example Builder image..."
+docker build -t cfplatformeng/docker-tile-example-builder .
+
+echo -e "\n Creating Docker Tile Example Docker image..."
+docker run -ti --rm --name docker-tile-example-builder \
+       -e DOCKER_HOST=${DOCKER_HOST} \
+       -e DOCKER_TLS_VERIFY=${DOCKER_TLS_VERIFY} \
+       -e DOCKER_CERT_PATH=${DOCKER_CERT_PATH} \
+       -v ${DOCKER_CERT_PATH}:${DOCKER_CERT_PATH} \
+       -v $(which docker):$(which docker) \
+       cfplatformeng/docker-tile-example-builder
+
+echo -e "\n Cleaning Docker Tile Example Builder image..."
+docker rmi cfplatformeng/docker-tile-example-builder
