@@ -1,3 +1,5 @@
+# docker-tile-example is no longer actively maintained by VMware.
+
 # Docker Image Example
 
 This is just a Docker image builder to be used with the [PCF Tile Generator](https://github.com/cf-platform-eng/tile-generator).
